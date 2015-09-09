@@ -1,15 +1,13 @@
 package br.com.lp.guilherme.testnavigationdrawer;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.os.Bundle;
+        import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
+        import android.support.v4.app.Fragment;
+        import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -56,7 +54,8 @@ public class MainActivity extends AppCompatActivity  {
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        Snackbar.make(mContentFrame, "Item One", Snackbar.LENGTH_SHORT).show();
+                        replaceFragment(new HomeFragment());
+//                        Snackbar.make(mContentFrame, "Item One", Snackbar.LENGTH_SHORT).show();
                         mCurrentSelectedPosition = 0;
                         mDrawerLayout.closeDrawers();
                         return true;
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
-
     }
 
     private void setUpToolbar() {
@@ -101,6 +99,10 @@ public class MainActivity extends AppCompatActivity  {
                 }
             });
         }
+    }
+
+    private void replaceFragment(Fragment frag) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_contentframe, frag, "TAG").commit();
     }
 
 }
